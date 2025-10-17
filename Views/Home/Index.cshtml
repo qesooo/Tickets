@@ -1,8 +1,188 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Menú Principal";
+
+    // Rutas de tickets (asumidas correctas)
+    var urlCrearTicket = "/Tickets/Create";
+    var urlAtencionTicket = "/Tickets/Index";
+    var urlSeguimientoTicket = "/SeguimientoTickets/Index";
+
+    // RUTA DE ACCIÓN que ejecuta el cierre de sesión en el servidor.
+    // Ajustado a tu controlador: AuthController.cs -> /Auth/Logout
+    var urlCerrarSesionAction = "/Auth/Logout";
+
+    // RUTA DE DESTINO a la que el servidor redirigirá después del logout.
+    // Basado en tu vista: /Views/Auth/Login.cshtml -> /Auth/Login
+    var urlLogin = "/Auth/Login";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    /* 1. Estilos Globales para el Fondo y Contenedor Principal */
+    body {
+        background-color: #F0F8FF; 
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Ajustar el contenedor del menú para centrarlo y moverlo más abajo */
+    .menu-container-wrapper {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        padding-top: 10vh;
+        padding-bottom: 10vh;
+    }
+
+    /* 2. Contenedor Principal del Menú */
+    .menu-principal {
+        max-width: 900px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 3. Contenedor de los Botones Superiores */
+    .botones-superiores {
+        display: flex;
+        justify-content: center;
+        gap: 35px;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+    }
+
+    /* 4. Estilo Común para los Botones (Brillantes y Definidos) */
+    .btn-menu {
+        padding: 18px 35px;
+        font-size: 19px;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        border-radius: 12px;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        cursor: pointer;
+        min-width: 200px;
+        flex: 1 1 auto;
+        max-width: 280px;
+        /* Sombra inicial suave para un look flotante */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        /* Efecto de sombra y elevación al pasar el ratón (hover) */
+        .btn-menu:hover {
+            transform: translateY(-4px); /* Se levanta un poco más para dar vida */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra más fuerte y nítida */
+        }
+
+    /* 5. Estilo Específico para Botones Celestes */
+    .btn-celeste {
+        background-color: #4CAFDE; /* Azul Celeste VIVO (similar al de tu imagen original) */
+        color: #fff; /* Texto blanco para un contraste más brillante */
+        /* Eliminamos el color gris suave para que el color celeste destaque más */
+    }
+
+    /* 6. Estilo Específico para Botón Rojo de Cerrar Sesión */
+    .btn-rojo {
+        background-color: #E94C4C; /* Rojo VIVO y Brillante */
+        color: #fff;
+        display: inline-block;
+        min-width: 280px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+        .btn-rojo:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+    /* 7. Estilo para el Título "Bienvenido" */
+    .titulo-bienvenida {
+        font-size: 3em;
+        color: #333333; /* Color más oscuro para un alto contraste con el fondo claro */
+        margin-bottom: 60px;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+
+    /* Estilos para el Formulario de Logout (sin cambios) */
+    .form-logout-container {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-submit {
+        display: inline-block;
+        border: none;
+        width: 280px;
+    }
+
+    /* 8. Media Queries for Responsiveness (sin cambios funcionales) */
+    @@media (max-width: 768px) {
+        .btn-menu, .btn-submit {
+            min-width: 80%;
+            margin-bottom: 20px;
+            padding: 14px 25px;
+            font-size: 17px;
+        }
+
+        .botones-superiores {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .btn-rojo, .btn-submit {
+            min-width: 80%;
+            margin-top: 10px;
+        }
+
+        .titulo-bienvenida {
+            font-size: 2.2em;
+            margin-bottom: 40px;
+        }
+
+        .menu-container-wrapper {
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .btn-menu, .btn-submit {
+            min-width: 90%;
+        }
+    }
+</style>
+
+@* Contenedor que centra el menú vertical y horizontalmente *@
+<div class="menu-container-wrapper">
+    <div class="menu-principal">
+        <h1 class="titulo-bienvenida">Bienvenido</h1>
+
+        @* Grupo de los tres botones celestes *@
+        <div class="botones-superiores">
+            @* Botón 1: Crear Ticket *@
+            <a href="@urlCrearTicket" class="btn-menu btn-celeste">
+                Crear Ticket
+            </a>
+
+            @* Botón 2: Atención de Ticket *@
+            <a href="@urlAtencionTicket" class="btn-menu btn-celeste">
+                Atención de Ticket
+            </a>
+
+            @* Botón 3: Seguimiento de Ticket *@
+            <a href="@urlSeguimientoTicket" class="btn-menu btn-celeste">
+                Seguimiento de Ticket
+            </a>
+        </div>
+
+        @* Botón rojo de Cerrar Sesión *@
+        <a href="@urlCerrarSesionAction" class="btn-menu btn-rojo">
+
+            Cerrar Sesión
+        </a>
+    </div>
 </div>

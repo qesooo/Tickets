@@ -1,0 +1,11 @@
+# Ignorar carpetas de compilación
+[Bb]in/
+[Oo]bj/
+
+# Ignorar archivos de solución de Visual Studio (opcional pero recomendado)
+*.suo
+*.user
+*.log
+
+# Ignorar carpetas ocultas de Visual Studio
+.vs/
