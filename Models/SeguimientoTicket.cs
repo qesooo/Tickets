@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Tickets.Models;
 
 namespace Tickets.Models;
 
@@ -15,7 +19,11 @@ public partial class SeguimientoTicket
 
     public DateTime? Fecha { get; set; }
 
+    [JsonIgnore] 
+    [ValidateNever]  
     public virtual Ticket IdTicketNavigation { get; set; } = null!;
 
+    [JsonIgnore]
+    [ValidateNever]
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 }

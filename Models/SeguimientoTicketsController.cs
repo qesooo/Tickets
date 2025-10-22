@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using Tickets.Filters;
+using Tickets.Models;
 
 namespace Tickets.Models
 {
+    [RolAuthorize("Tecnico, Cliente")]
     public class SeguimientoTicketsController : Controller
     {
         private readonly TicketsDbContext _context;
@@ -43,13 +46,21 @@ namespace Tickets.Models
 
             return View(seguimientoTicket);
         }
-
+        [RolAuthorize("Tecnico")]
         // GET: SeguimientoTickets/Create
-        public IActionResult Create()
+        public IActionResult Create(int? ticketId)
         {
-            ViewData["IdTicket"] = new SelectList(_context.Tickets, "IdTicket", "IdTicket");
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "IdUsuario", "IdUsuario");
-            return View();
+            if (ticketId == null)
+            {
+                // Si no viene el ID del ticket, no puede crear un seguimiento.
+                return NotFound("Debe especificar el ID del Ticket al que desea dar seguimiento.");
+            }
+
+            // Usamos ViewBag para pasar el ID del ticket a la vista.
+            ViewBag.IdTicket = ticketId.Value;
+
+            // Devolvemos un objeto vacío para el formulario
+            return View(new SeguimientoTicket { IdTicket = ticketId.Value });
         }
 
         // POST: SeguimientoTickets/Create
@@ -57,19 +68,62 @@ namespace Tickets.Models
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSeguimiento,IdTicket,IdUsuario,Mensaje,Fecha")] SeguimientoTicket seguimientoTicket)
+        public async Task<IActionResult> Create([Bind("IdSeguimiento,IdTicket,IdUsuario,Mensaje")] SeguimientoTicket seguimientoTicket)
         {
+            var userIdString = HttpContext.Session.GetString("UsuarioId");
+
+            if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
+            {
+                ModelState.AddModelError(string.Empty, "Error de Sesión: No se pudo identificar al usuario.");
+            }
+            else
+            {
+                seguimientoTicket.IdUsuario = userId;
+                seguimientoTicket.Fecha = DateTime.Now; // Aseguramos que la fecha esté asignada
+            }
+
+            // Si la ID del Ticket que viene del formulario es 0 o inválida, esto fallará.
+            if (seguimientoTicket.IdTicket <= 0 || !_context.Tickets.Any(t => t.IdTicket == seguimientoTicket.IdTicket))
+            {
+                ModelState.AddModelError("IdTicket", "El ID del Ticket no es válido o no existe.");
+            }
+
+
             if (ModelState.IsValid)
             {
-                _context.Add(seguimientoTicket);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // El código solo llega aquí si la ID de sesión es correcta, el ticket existe, y Mensaje no está vacío.
+                try
+                {
+                    _context.Add(seguimientoTicket);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Details", "Tickets", new { id = seguimientoTicket.IdTicket });
+                }
+                catch (Exception ex)
+                {
+                    // CAPTURA cualquier error de base de datos/inserción aquí (por si el problema es la DB)
+                    ModelState.AddModelError(string.Empty, $"Error al guardar en DB: {ex.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Error de DB: {ex.ToString()}");
+                }
             }
-            ViewData["IdTicket"] = new SelectList(_context.Tickets, "IdTicket", "IdTicket", seguimientoTicket.IdTicket);
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "IdUsuario", "IdUsuario", seguimientoTicket.IdUsuario);
+
+            // Si llegamos aquí, ModelState.IsValid falló o la DB falló.
+
+            // --- NUEVO PARA DEPURACIÓN ---
+            // Recorre los errores y muéstralos en la ventana de Salida.
+            foreach (var state in ModelState)
+            {
+                foreach (var error in state.Value.Errors)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error de Validación: Campo '{state.Key}' - Mensaje: {error.ErrorMessage}");
+                }
+            }
+            // --- FIN DEPURACIÓN ---
+
+            // Recargar ViewBag
+            ViewBag.IdTicket = seguimientoTicket.IdTicket;
             return View(seguimientoTicket);
         }
-
+        [RolAuthorize("Tecnico")]
         // GET: SeguimientoTickets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -124,7 +178,7 @@ namespace Tickets.Models
             ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "IdUsuario", "IdUsuario", seguimientoTicket.IdUsuario);
             return View(seguimientoTicket);
         }
-
+        [RolAuthorize("Tecnico")]
         // GET: SeguimientoTickets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

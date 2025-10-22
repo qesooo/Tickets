@@ -17,6 +17,10 @@ namespace Tickets.Controllers
         {
             return View();
         }
+        public IActionResult IndexTecnico()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

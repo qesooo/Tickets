@@ -36,7 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdTecnicoNavigation)
             </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -61,14 +61,24 @@
                 @Html.DisplayFor(modelItem => item.FechaCierre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdClienteNavigation.IdUsuario)
+                @Html.DisplayFor(modelItem => item.IdClienteNavigation.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdTecnicoNavigation.IdUsuario)
+                @Html.DisplayFor(modelItem => item.IdTecnicoNavigation.Nombre)
             </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdTicket">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdTicket">Details</a> |
+                    @* Lógica del botón "Dar Seguimiento" *@
+                    @if (ViewData["IsTecnico"] != null && (bool)ViewData["IsTecnico"] == true)
+                    {
+                        // Este botón solo aparece para el ROL "Tecnico"
+                        // Asume que tienes un controlador/vista llamado Seguimiento/Crear o similar
+                        <a href="/SeguimientoTickets/Create?ticketId=@item.IdTicket" class="btn btn-sm btn-success">
+                            Dar Seguimiento
+                        </a>
+                    }
                 <a asp-action="Delete" asp-route-id="@item.IdTicket">Delete</a>
             </td>
         </tr>

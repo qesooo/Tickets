@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Tickets.Models;
 using Tickets.ViewModels;
 using System.Linq;
@@ -8,7 +7,7 @@ namespace ProyectoSoporteTI.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly TicketsDbContext _context; // Cambia por el nombre de tu contexto
+        private readonly TicketsDbContext _context; 
 
         public AuthController(TicketsDbContext context)
         {
@@ -37,12 +36,13 @@ namespace ProyectoSoporteTI.Controllers
             }
 
             // Guarda los datos del usuario en sesión
+            HttpContext.Session.SetString("UsuarioId", usuario.IdUsuario.ToString());
             HttpContext.Session.SetString("UsuarioNombre", usuario.Nombre);
             HttpContext.Session.SetString("UsuarioRol", usuario.Rol);
 
             // Redirigir según el rol
             if (usuario.Rol == "Tecnico")
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("IndexTecnico", "Home");
             else
                 return RedirectToAction("Index", "Home");
         }

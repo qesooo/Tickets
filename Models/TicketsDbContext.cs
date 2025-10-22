@@ -45,6 +45,8 @@ public partial class TicketsDbContext : DbContext
                 .HasConstraintName("FK__ArchivosA__IdTic__48CFD27E");
         });
 
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<SeguimientoTicket>(entity =>
         {
             entity.HasKey(e => e.IdSeguimiento).HasName("PK__Seguimie__5643F60FE151FF9A");
