@@ -2,29 +2,177 @@
 
 @{
     ViewData["Title"] = "Iniciar Sesión";
+    // Definimos el color de acento
+    var accentColor = "#007bff";
+    // Color de fondo para el círculo (un azul sólido)
+    var circleBackgroundColor = "#007bff";
+    // Color del ícono dentro del círculo (blanco)
+    var iconColor = "white";
 }
 
-<div class="container mt-5" style="max-width:400px;">
-    <h2 class="text-center">@ViewData["Title"]</h2>
-    <form asp-action="Login" method="post" class="mt-4">
-        <div class="form-group mb-3">
-            <label asp-for="Correo" class="form-label"></label>
-            <input asp-for="Correo" class="form-control" />
+<style>
+    /* 1. DISEÑO GLOBAL Y FONDO CELESTE CLARO */
+    body {
+        background-color: #e6f2ff !important;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        padding-top: 0 !important;
+    }
+
+    /* 2. OCULTAR BARRA DE NAVEGACIÓN Y FOOTER */
+    nav.navbar, header, footer {
+        display: none !important;
+    }
+
+    /* 3. CONTENEDOR PRINCIPAL (La 'tarjeta' de login) */
+    .login-container {
+        background-color: white;
+        border: 1px solid #cce5ff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 40px 30px;
+        max-width: 420px;
+        width: 90%;
+        margin: auto;
+    }
+
+    /* 4. TÍTULO Y CÍRCULO DEL ÍCONO SUPERIOR */
+    .text-center h2 {
+        display: block;
+        margin-bottom: 25px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    /* Arreglo del Círculo (Fondo Sólido Azul, sin borde) */
+    .user-icon-circle {
+        display: block;
+        width: 80px;
+        height: 80px;
+        border: none;
+        background-color: @circleBackgroundColor;
+        border-radius: 50%;
+        margin: 0 auto 20px auto;
+        position: relative;
+    }
+
+        /* Estilos para el SVG dentro del círculo */
+        .user-icon-circle svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px; /* Ajusta el tamaño del SVG */
+            height: 40px;
+            fill: @iconColor; /* El color del SVG será blanco */
+        }
+
+    /* 5. CAMPOS DE TEXTO CON ÍCONOS INTERNOS */
+    .input-icon-wrapper {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+        /* Estilo del ícono dentro del campo */
+        .input-icon-wrapper .fa, .input-icon-wrapper .fas {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #007bff;
+            z-index: 10;
+            font-size: 1rem;
+        }
+
+        /* Estilo del input */
+        .input-icon-wrapper .form-control {
+            padding-left: 45px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            font-size: 1rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+            /* Efecto de foco para el input */
+            .input-icon-wrapper .form-control:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+
+    /* 6. Opciones Adicionales ("Remember me" y "Forgot password") */
+    .options-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+    }
+
+    .forgot-password a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    /* 7. BOTÓN INGRESAR */
+    .btn-login {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+        font-size: 1.1rem;
+        padding: 10px 0;
+        width: 100%;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+
+    /* 8. Volver al inicio */
+    .volver-inicio-link {
+        color: #007bff;
+        text-decoration: none;
+        margin-top: 20px;
+        display: block;
+    }
+
+</style>
+
+<div class="login-container">
+    <div class="text-center">
+        <div class="user-icon-circle">
+            @* Se eliminó el ícono de Font Awesome y se insertó tu SVG *@
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+            </svg>
+        </div>
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <form asp-action="Login" method="post">
+
+        <div class="input-icon-wrapper">
+            <i class="fas fa-user"></i>
+            <input asp-for="Correo" class="form-control" placeholder="Correo" />
             <span asp-validation-for="Correo" class="text-danger"></span>
         </div>
 
-        <div class="form-group mb-3">
-            <label asp-for="Clave" class="form-label"></label>
-            <input asp-for="Clave" type="password" class="form-control" />
+        <div class="input-icon-wrapper">
+            <i class="fas fa-lock"></i>
+            <input asp-for="Clave" type="password" class="form-control" placeholder="Contraseña" />
             <span asp-validation-for="Clave" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+       
+
+        <button type="submit" class="btn btn-login">INGRESAR</button>
     </form>
 
-    <div class="text-center mt-3">
-        <a href="/">Volver al inicio</a>
-    </div>
+    
 </div>
 
 @section Scripts {

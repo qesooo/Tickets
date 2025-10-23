@@ -1,87 +1,197 @@
 ﻿@model IEnumerable<Tickets.Models.Ticket>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Registro de Tickets";
+    var pastelBlue = "#ADD8E6"; // Celeste Pastel (Azul Claro)
+    var darkBlue = "#191970";   // Azul Oscuro para el encabezado
+    var pastelOrange = "#FFA07A"; // Naranja Claro (LightSalmon)
 }
 
-<h1>Index</h1>
+<style>
+    /* Estilos para el fondo y centrado de la página */
+    body {
+        background-color: @pastelBlue;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Asunto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Texto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prioridad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCreacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCierre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdClienteNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTecnicoNavigation)
-            </th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Asunto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Texto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prioridad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCierre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdClienteNavigation.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTecnicoNavigation.Nombre)
-            </td>
+    /* Contenedor principal para centrar la tabla */
+    .table-center-container {
+        min-height: calc(100vh - 50px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdTicket">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdTicket">Details</a> |
-                    @* Lógica del botón "Dar Seguimiento" *@
-                    @if (ViewData["IsTecnico"] != null && (bool)ViewData["IsTecnico"] == true)
-                    {
-                        // Este botón solo aparece para el ROL "Tecnico"
-                        // Asume que tienes un controlador/vista llamado Seguimiento/Crear o similar
-                        <a href="/SeguimientoTickets/Create?ticketId=@item.IdTicket" class="btn btn-sm btn-success">
-                            Dar Seguimiento
-                        </a>
-                    }
-                <a asp-action="Delete" asp-route-id="@item.IdTicket">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    /* Estilo del título principal */
+    h1 {
+        text-align: center;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+        width: 100%;
+    }
+
+    /* Estilo de la tabla (Ancho maximizado) */
+    .table {
+        width: 98%;
+        max-width: 1600px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        /* Estilo del encabezado de la tabla (thead) */
+        .table thead th {
+            background-color: @darkBlue;
+            color: white;
+            font-weight: 700;
+            border: none;
+            padding: 15px 10px;
+            text-align: left;
+        }
+
+        /* Estilo para las filas alternadas (tbody) */
+        .table tbody tr:nth-of-type(odd) {
+            background-color: @pastelBlue;
+        }
+
+        .table tbody tr:nth-of-type(even) {
+            background-color: white;
+        }
+
+        .table tbody td {
+            padding: 12px 10px;
+            vertical-align: middle;
+            border-top: 1px solid #dee2e6;
+        }
+
+    /* -------------------------------------- */
+    /* ESTILO CLAVE: Contenedor de Acciones para el layout 2x2 */
+    .btn-actions-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        /* AJUSTE CLAVE: Aumentar el ancho máximo del contenedor de botones */
+        max-width: 220px;
+        margin: 0;
+    }
+
+    /* Estilos base para todos los botones de acción (ESTÉTICA UNIFORME) */
+    .btn-action {
+        display: block;
+        padding: 6px 8px; /* Padding vertical y horizontal ligeramente ajustado */
+        margin: 2px;
+        border: none;
+        border-radius: 4px;
+        font-size: 0.85em;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.2s;
+        color: white;
+        width: 47%; /* Mantiene dos por línea */
+        line-height: 1.2; /* Ayuda a centrar el texto verticalmente */
+        white-space: nowrap; /* Evita el salto de línea del texto */
+        overflow: hidden; /* Oculta cualquier texto que aún no quepa */
+        text-overflow: ellipsis; /* Opcional: añade puntos suspensivos si se desborda, aunque con 220px no debería ser necesario */
+    }
+
+    /* Botón Dar Seguimiento (Naranja) */
+    .btn-seguimiento {
+        background-color: @pastelOrange !important;
+        color: white; /* Letras Blancas */
+    }
+
+        .btn-seguimiento:hover {
+            background-color: #fa8072 !important;
+        }
+
+    /* Botón Editar (Verde) */
+    .btn-editar {
+        background-color: #28a745;
+    }
+
+        .btn-editar:hover {
+            background-color: #1e7e34;
+        }
+
+    /* Botón Detalles (Azul) */
+    .btn-detalles {
+        background-color: #007bff;
+    }
+
+        .btn-detalles:hover {
+            background-color: #0056b3;
+        }
+
+    /* Botón Eliminar (Rojo) */
+    .btn-eliminar {
+        background-color: #dc3545;
+    }
+
+        .btn-eliminar:hover {
+            background-color: #bd2130;
+        }
+</style>
+
+<div class="table-center-container">
+
+    <h1>@ViewData["Title"]</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Asunto)</th>
+                <th>@Html.DisplayNameFor(model => model.Texto)</th>
+                <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                <th>@Html.DisplayNameFor(model => model.Prioridad)</th>
+                <th>Fecha Creación</th>
+                <th>Fecha Cierre</th>
+                <th>Cliente</th>
+                <th>Técnico</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Asunto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Texto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Prioridad)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FechaCierre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdClienteNavigation.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdTecnicoNavigation.Nombre)</td>
+
+                    <td>
+                        <div class="btn-actions-container">
+
+                            <a asp-action="Edit" asp-route-id="@item.IdTicket" class="btn-action btn-editar">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.IdTicket" class="btn-action btn-detalles">Detalles</a>
+
+                            <a asp-action="Delete" asp-route-id="@item.IdTicket" class="btn-action btn-eliminar">Eliminar</a>
+
+                            @if (ViewData["IsTecnico"] != null && (bool)ViewData["IsTecnico"] == true)
+                            {
+                                <a href="/SeguimientoTickets/Create?ticketId=@item.IdTicket" class="btn-action btn-seguimiento">
+                                    Dar Seguimiento
+                                </a>
+                            }
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

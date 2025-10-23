@@ -17,129 +17,129 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Tickets
 build_property.RootNamespace = Tickets
-build_property.ProjectDir = C:\Users\James Hamilton\source\repos\Tickets\Tickets\
+build_property.ProjectDir = C:\Users\ASUS\Music\Ticket repo\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\James Hamilton\source\repos\Tickets\Tickets
+build_property.MSBuildProjectDirectory = C:\Users\ASUS\Music\Ticket repo
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/ArchivosAdjuntoes/Create.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/ArchivosAdjuntoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJjaGl2b3NBZGp1bnRvZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/ArchivosAdjuntoes/Delete.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/ArchivosAdjuntoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJjaGl2b3NBZGp1bnRvZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/ArchivosAdjuntoes/Details.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/ArchivosAdjuntoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJjaGl2b3NBZGp1bnRvZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/ArchivosAdjuntoes/Edit.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/ArchivosAdjuntoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJjaGl2b3NBZGp1bnRvZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/ArchivosAdjuntoes/Index.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/ArchivosAdjuntoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJjaGl2b3NBZGp1bnRvZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Auth/Login.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Home/Index.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Home/IndexTecnico.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Home/IndexTecnico.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleFRlY25pY28uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Home/Privacy.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/SeguimientoTickets/Create.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/SeguimientoTickets/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VndWltaWVudG9UaWNrZXRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/SeguimientoTickets/Delete.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/SeguimientoTickets/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VndWltaWVudG9UaWNrZXRzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/SeguimientoTickets/Details.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/SeguimientoTickets/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VndWltaWVudG9UaWNrZXRzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/SeguimientoTickets/Edit.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/SeguimientoTickets/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VndWltaWVudG9UaWNrZXRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/SeguimientoTickets/Index.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/SeguimientoTickets/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VndWltaWVudG9UaWNrZXRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Shared/Error.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Tickets/Create.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Tickets/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Tickets/Delete.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Tickets/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Tickets/Details.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Tickets/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Tickets/Edit.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Tickets/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Tickets/Index.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Tickets/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Usuarios/Create.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Usuarios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Usuarios/Delete.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Usuarios/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Usuarios/Details.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Usuarios/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Usuarios/Edit.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Usuarios/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Usuarios/Index.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/_ViewImports.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/_ViewStart.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/James Hamilton/source/repos/Tickets/Tickets/Views/Shared/_Layout.cshtml]
+[C:/Users/ASUS/Music/Ticket repo/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-hecsjiqo4d

@@ -1,66 +1,214 @@
 ﻿@model Tickets.Models.Ticket
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Ticket"; // CAMBIO: Título en español
+
+    // Colores del proyecto (consistentes con las vistas anteriores)
+    var backgroundPastelBlue = "#ADD8E6"; // Fondo de la página
+    var backButtonColor = "#F59292";     // Rojo/Salmón pastel para 'Volver a la lista'
 }
 
-<h1>Details</h1>
+<style>
+    /* 1. ESTILOS GLOBALES Y FONDO */
+    body {
+        /* Fondo de la página: Celeste Pastel */
+        background-color: @backgroundPastelBlue !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
 
-<div>
-    <h4>Ticket</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Asunto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Asunto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Texto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Texto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prioridad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prioridad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaCreacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaCreacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaCierre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaCierre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdClienteNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdClienteNavigation.IdUsuario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdTecnicoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTecnicoNavigation.IdUsuario)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdTicket">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    /* 2. OCULTAR ELEMENTOS INNECESARIOS (Subtítulo y línea divisoria) */
+    h4, hr {
+        display: none;
+    }
+
+    /* 3. CONTENEDOR PRINCIPAL Y CENTRADO */
+    /* Centra el contenido principal sin tocar el menú superior */
+    .page-content-wrapper {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center; /* Centrado horizontal */
+        align-items: center; /* Centrado vertical */
+        padding: 20px 0;
+        width: 100%;
+    }
+
+    .details-container {
+        /* Tarjeta blanca para los detalles */
+        background-color: white;
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 700px; /* Ancho profesional y consistente */
+        box-sizing: border-box;
+    }
+
+    /* 4. TÍTULOS */
+    h1 {
+        /* Título "Detalles del Ticket" centrado */
+        text-align: center;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 25px;
+        font-size: 2em;
+    }
+
+    /* 5. LISTA DE DETALLES (dl) */
+    .dl-horizontal {
+        /* Usamos flexbox para alinear las etiquetas y los valores */
+        display: grid;
+        grid-template-columns: 35% 65%; /* Ancho fijo para etiquetas, ancho variable para valores */
+        gap: 15px 10px; /* Espaciado entre filas y columnas */
+        margin-bottom: 30px;
+    }
+
+        /* Etiquetas (dt) */
+        .dl-horizontal dt {
+            font-weight: 600; /* Negrita para las etiquetas */
+            color: #555;
+            text-align: right; /* Alineación a la derecha para las etiquetas */
+            padding-right: 15px;
+            word-wrap: break-word;
+        }
+
+        /* Valores (dd) */
+        .dl-horizontal dd {
+            font-weight: 400;
+            color: #333;
+            margin-left: 0;
+            word-wrap: break-word;
+        }
+
+    /* Ajuste para el campo "Texto" si es largo */
+    /* Dejamos 'Texto' en una fila de ancho completo (100%) para mejor lectura */
+    .full-width-field {
+        grid-column: 1 / -1; /* Ocupa ambas columnas */
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+        .full-width-field dt, .full-width-field dd {
+            text-align: left;
+            padding-right: 0;
+            grid-column: 1 / -1; /* Etiqueta y valor en su propia fila de 100% */
+        }
+
+        .full-width-field dt {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+    /* 6. BOTONES (Consistente con la vista Edit) */
+    .btn-action {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        margin-top: 10px;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
+
+    /* Botón "Editar" (Azul para mantener consistencia con los botones de acción) */
+    .btn-editar {
+        background-color: #007bff; /* Azul profesional */
+        color: white;
+        margin-bottom: 5px;
+    }
+
+        .btn-editar:hover {
+            background-color: #0056b3;
+        }
+
+    /* Botón "Volver a la lista" (Rojo/Salmón Pastel) */
+    .btn-volver {
+        background-color: @backButtonColor;
+        color: white;
+        margin-top: 10px;
+    }
+
+        .btn-volver:hover {
+            background-color: #e07f7f;
+        }
+</style>
+
+<div class="page-content-wrapper">
+    <div class="details-container">
+
+        <h1>@ViewData["Title"]</h1>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Asunto)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Asunto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Prioridad)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prioridad)
+            </dd>
+
+            <dt>
+                Cliente
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdClienteNavigation.Nombre)
+            </dd>
+
+            <dt>
+                Técnico
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdTecnicoNavigation.Nombre)
+            </dd>
+
+            <dt>
+                Fecha de Creación
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FechaCreacion)
+            </dd>
+
+            <dt>
+                Fecha de Cierre
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FechaCierre)
+            </dd>
+
+            <div class="full-width-field">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Texto)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Texto)
+                </dd>
+            </div>
+        </dl>
+
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.IdTicket" class="btn-action btn-editar">Editar</a>
+
+            <a asp-action="Index" class="btn-action btn-volver">Volver a la lista</a>
+        </div>
+    </div>
 </div>

@@ -2,38 +2,151 @@
 
 @{
     ViewData["Title"] = "Agregar Seguimiento";
+    var pastelBlueBackground = "#ADD8E6"; // Fondo celeste pastel
+    var primaryBlue = "#007bff";        // Azul primario para Guardar
+    var secondaryRed = "#f48888";       // Rojo pastel para Volver
 }
 
-<h1>Agregar Seguimiento al Ticket @ViewBag.IdTicket</h1>
+<style>
+    /* 1. Estilos Globales y Fondo (Consistencia con el proyecto) */
+    body {
+        background-color: @pastelBlueBackground;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-<h4>SeguimientoTicket</h4>
-<hr />
-<div class="row">
-    <div class="col-md-6">
+    /* 2. Contenedor Principal Centrado (Imita la estructura de Index) */
+    .form-center-container {
+        min-height: calc(100vh - 50px); /* Ajusta por el menú superior si existe */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centrado vertical */
+        align-items: center; /* Centrado horizontal */
+        padding: 20px;
+    }
+
+    /* 3. Estilo de la Tarjeta (Fondo blanco, bordes suaves, sombra) */
+    .card-form {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px 40px;
+        width: 100%;
+        max-width: 600px; /* Ancho máximo para el formulario */
+    }
+
+    /* 4. Título */
+    h1 {
+        text-align: center;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 25px;
+        font-size: 2em;
+    }
+
+    /* 5. Estilos de Formulario (Espaciado y consistencia) */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+
+    /* 6. Estilos de Botones */
+    .btn-custom {
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 1em;
+        transition: background-color 0.2s;
+        border: none;
+        width: 100%; /* Ocupan todo el ancho de su contenedor */
+        margin-top: 10px;
+    }
+
+    .btn-guardar {
+        background-color: @primaryBlue; /* Azul */
+        color: white;
+    }
+
+        .btn-guardar:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-volver {
+        background-color: @secondaryRed; /* Rojo Pastel */
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+    }
+
+        .btn-volver:hover {
+            background-color: #d96a6a;
+        }
+
+    /* Estilo para los botones en la misma línea (opcional) */
+    .btn-group-custom {
+        display: flex;
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+        .btn-group-custom .btn-custom {
+            width: 50%;
+        }
+
+    /* Ajuste para la etiqueta H4 */
+    h4 {
+        text-align: center;
+        color: #555;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<div class="form-center-container">
+    <div class="card-form">
+
+        <h1>Dar Seguimiento</h1>
+        <h4>Ticket #@ViewBag.IdTicket</h4>
+        <hr />
+
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @* 1. CAMPO OCULTO para IdTicket (lo recibimos del ViewBag) *@
+            @* 1. CAMPO OCULTO para IdTicket *@
             <input type="hidden" asp-for="IdTicket" value="@ViewBag.IdTicket" />
 
-            @* 2. Campo IdUsuario y Fecha se eliminan, ya que se asignan en el Controlador *@
-
+            @* 2. Campo Mensaje de Seguimiento (Se mantiene único y grande) *@
             <div class="form-group">
                 <label asp-for="Mensaje" class="control-label">Mensaje de Seguimiento</label>
-                <textarea asp-for="Mensaje" class="form-control" rows="5"></textarea>
+                <textarea asp-for="Mensaje" class="form-control" rows="6" placeholder="Ingrese los detalles del seguimiento..."></textarea>
                 <span asp-validation-for="Mensaje" class="text-danger"></span>
             </div>
 
-            <div class="form-group mt-3">
-                <input type="submit" value="Guardar Seguimiento" class="btn btn-primary" />
+            @* 3. Botones (Se colocan en un grupo para alineación vertical, como en la referencia) *@
+            <div class="form-group mt-4">
+                <input type="submit" value="Guardar" class="btn-custom btn-guardar" />
+
+                <a asp-action="Index" class="btn-custom btn-volver">Volver a la lista</a>
             </div>
+
+            @* Si desea los botones uno al lado del otro, descomente el siguiente bloque y comente el anterior:
+            <div class="btn-group-custom">
+                <input type="submit" value="Guardar" class="btn-custom btn-guardar" />
+                <a asp-action="Index" class="btn-custom btn-volver">Volver a la lista</a>
+            </div>
+            *@
         </form>
     </div>
-</div>
-
-<div class="mt-3">
-    @* Redirigir a los detalles del ticket *@
-    <a asp-controller="Tickets" asp-action="Index" asp-route-id="@ViewBag.IdTicket">Volver a la lista de Tickets</a>
 </div>
 
 @section Scripts {

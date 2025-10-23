@@ -1,20 +1,142 @@
 ﻿@model Tickets.Models.Ticket
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Ticket";
+    // Color principal para el botón Crear (Azul)
+    var principalColor = "#007bff";
+    // Color de fondo de la página (Celeste Pastel - ajustado)
+    var backgroundColor = "#ADD8E6"; // Azul claro (Celeste)
+    // Color de Volver a la Lista (Rojo Pastel - ajustado)
+    var secondaryColor = "#F08080"; // Rojo Claro (Rojo Pastel)
+
+    // Se asume que el menú Tickets/Home y el footer se renderizan en el _Layout.cshtml.
 }
 
-<h1>Create</h1>
+<style>
+    /* 1. ESTILOS GLOBALES Y FONDO */
+    body {
+        /* Fondo de la página: Celeste Pastel */
+        background-color: @backgroundColor !important;
+        /* Fuente formal y legible */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<h4>Ticket</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    /* 2. CONTENEDOR PRINCIPAL PARA CENTRAR HORIZONTAL Y VERTICALMENTE */
+    .centered-content {
+        min-height: calc(100vh - 56px - 40px); /* Ejemplo: 100vh menos navbar y footer/margen */
+        display: flex;
+        justify-content: center; /* Centrado horizontal */
+        align-items: center; /* Centrado vertical */
+        margin: 0;
+        padding: 20px 0; /* Espacio superior e inferior para evitar que toque los bordes */
+    }
+
+    /* 3. CONTENEDOR PRINCIPAL DEL FORMULARIO */
+    .form-container {
+        /* Tarjeta blanca para el formulario */
+        background-color: white;
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        /* CAMBIO: Aumentado el ancho máximo a 700px */
+        max-width: 700px;
+        box-sizing: border-box;
+    }
+
+    /* 4. TÍTULOS Y ENCABEZADOS */
+    h1 {
+        /* Título "Crear Ticket" centrado */
+        text-align: center;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 25px;
+        font-size: 2em;
+    }
+
+    /* Ocultar el subtítulo "Ticket" y la línea <hr /> si existen */
+    h4, hr {
+        display: none;
+    }
+
+    /* 5. CAMPOS DEL FORMULARIO */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .control-label {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 10px 12px;
+        box-shadow: none;
+        transition: border-color 0.2s;
+        font-size: 1em;
+    }
+
+        .form-control:focus {
+            border-color: @principalColor; /* Borde azul al enfocar */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+    /* Altura para el campo de texto grande */
+    textarea.form-control {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* 6. BOTONES */
+    .btn-action {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
+        margin-top: 10px;
+        text-decoration: none; /* Para el botón de Volver */
+        display: block; /* Para que el enlace Volver ocupe todo el ancho */
+        text-align: center;
+    }
+
+    /* Botón "Crear" (Azul profesional) */
+    .btn-crear {
+        background-color: @principalColor; /* Azul */
+        color: white;
+        margin-bottom: 5px; /* Separación del botón Volver */
+    }
+
+        .btn-crear:hover {
+            background-color: #0056b3;
+        }
+
+    /* Botón "Volver a la lista" (Rojo pastel) */
+    .btn-volver {
+        background-color: @secondaryColor; /* Rojo Pastel */
+        color: white;
+    }
+
+        .btn-volver:hover {
+            background-color: #d15c5c; /* Tono un poco más oscuro al pasar el ratón */
+        }
+</style>
+
+<div class="centered-content">
+    <div class="form-container">
+
+        <h1>@ViewData["Title"]</h1> <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="IdTecnico" class="control-label"></label>
+                <label class="control-label">Técnico</label>
                 <select asp-for="IdTecnico" class="form-control" asp-items="ViewBag.IdTecnico">
                     <option value="">-- Seleccione un Técnico (Opcional) --</option>
                 </select>
@@ -28,7 +150,8 @@
 
             <div class="form-group">
                 <label asp-for="Texto" class="control-label"></label>
-                <textarea asp-for="Texto" class="form-control" rows="5"></textarea> <span asp-validation-for="Texto" class="text-danger"></span>
+                <textarea asp-for="Texto" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Texto" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -38,14 +161,14 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn-action btn-crear" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <div>
+            <a asp-action="Index" class="btn-action btn-volver">Volver a la lista</a>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
